@@ -1,25 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
+    <meta charset="UTF-8">
     <title>ورود کاربران</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            min-height: 100vh;
+            padding-top: 50px;
+            direction: rtl;
+        }
+
+        h1 {
+            color: #3b5bdb;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form p {
+            margin-bottom: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3b5bdb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #364fc7;
+        }
+
+        .message {
+            color: red;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            display: inline-block;
+            color: #3b5bdb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h1>صفحه ورود</h1>
 
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color:red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+    <div class="card">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">ورود</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">ورود</button>
+        </form>
+    </div>
 
-    <a href="{% url 'home' %}">
-        <button>بازگشت به فرم دانشجو</button>
-    </a>
+    <a class="back-btn" href="{% url 'home' %}">بازگشت به فرم دانشجو</a>
 </body>
 </html>

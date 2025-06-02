@@ -1,30 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لیست دانشجویان</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .search-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            padding: 10px 15px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-button {
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .search-button:hover {
+            background-color: var(--secondary);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>لیست دانشجویان</h1>
-    
-    <!-- فرم جستجو -->
-    <form method="get" action="">
-        <input type="text" name="q" value="{{ search_query }}" placeholder="جستجوی دانشجو...">
-        <button type="submit">جستجو</button>
-    </form>
-    
-    <ul>
-        {% for student in students %}
-            <li>
-                {{ student.first_name }} {{ student.last_name }} - 
-                سن: {{ student.age }} - 
-                رشته: {{ student.major }}
-            </li>
-        {% empty %}
-            <li>هیچ دانشجویی یافت نشد.</li>
-        {% endfor %}
-    </ul>
-    
-    <!-- لینک بازگشت به صفحه اصلی -->
-    <a href="{% url 'home' %}">بازگشت به صفحه اصلی</a>
+    <div class="container">
+        <h1>لیست دانشجویان</h1>
+
+        <form method="get" action="" class="search-form">
+            <input type="text" name="q" value="{{ search_query }}" class="search-input" placeholder="جستجوی دانشجو...">
+            <button type="submit" class="search-button">جستجو</button>
+        </form>
+
+        {% if students %}
+        <table>
+            <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>نام خانوادگی</th>
+                    <th>سن</th>
+                    <th>رشته تحصیلی</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.major }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="no-data">هیچ دانشجویی یافت نشد.</div>
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="back-link">بازگشت به صفحه اصلی</a>
+    </div>
 </body>
 </html>
