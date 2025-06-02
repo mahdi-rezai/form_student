@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>فرم دانشجو</title>
+</head>
+<body>
+    <h1>فرم ثبت اطلاعات دانشجو</h1>
+
+    <!-- دکمه ورود -->
+    <a href="{% url 'login' %}">
+        <button>ورود</button>
+    </a>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ثبت</button>
+    </form>
+
+    <a href="{% url 'student_list' %}">
+        <button>نمایش لیست دانشجویان</button>
+    </a>
+</body>
+</html>

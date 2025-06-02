@@ -1,0 +1,16 @@
+<!-- filepath: c:\Users\1261m\Desktop\project_class\myproject\form\templates\form\edit_student.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ویرایش دانشجو</title>
+</head>
+<body>
+    <h1>ویرایش اطلاعات {{ student.first_name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ذخیره تغییرات</button>
+    </form>
+    <a href="{% url 'student_list' %}">بازگشت به لیست دانشجویان</a>
+</body>
+</html>

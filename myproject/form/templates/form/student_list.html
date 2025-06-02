@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>لیست دانشجویان</title>
+</head>
+<body>
+    <h1>لیست دانشجویان</h1>
+    
+    <!-- فرم جستجو -->
+    <form method="get" action="">
+        <input type="text" name="q" value="{{ search_query }}" placeholder="جستجوی دانشجو...">
+        <button type="submit">جستجو</button>
+    </form>
+    
+    <ul>
+        {% for student in students %}
+            <li>
+                {{ student.first_name }} {{ student.last_name }} - 
+                سن: {{ student.age }} - 
+                رشته: {{ student.major }}
+            </li>
+        {% empty %}
+            <li>هیچ دانشجویی یافت نشد.</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- لینک بازگشت به صفحه اصلی -->
+    <a href="{% url 'home' %}">بازگشت به صفحه اصلی</a>
+</body>
+</html>

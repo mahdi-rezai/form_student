@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ورود کاربران</title>
+</head>
+<body>
+    <h1>صفحه ورود</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ورود</button>
+    </form>
+
+    <a href="{% url 'home' %}">
+        <button>بازگشت به فرم دانشجو</button>
+    </a>
+</body>
+</html>
